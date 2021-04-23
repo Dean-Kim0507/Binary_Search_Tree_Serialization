@@ -1,89 +1,64 @@
 package implementation;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
 import utilities.Iterator;
 
 /**
- * BSTIteratorPostOrder.java - This iterator makes a copy of 
+ * BSTIteratorInOrder.java - This iterator makes a copy of 
  * the collection of elements and performs a complete walk 
- * through the data structure, in order  trasversal.
+ * through the data structure, in in-order trasversal.
  * 
  * @author Jaehan Kim, Donghyun Kim, Maria Laura Diaz Pena
  * @version April 15, 2021
  */
 public class BSTIteratorInOrder<E> implements Iterator<E> {
-	
-	/**
-	 * Stack where Binary Search Tree is stored.
-	 */
-	private Stack<BSTreeNode<E>> stack;
-	private BSTreeNode<E> node;
-	/**
-	 * User defined constructor
-	 * @param root
-	 */
-	public BSTIteratorInOrder (BSTreeNode<E> root) {
-		stack = new Stack<BSTreeNode<E>>();
-		while (root != null) {
-			stack.push(root);
-			root = root.getLeft();		
-		}
-//		node = root;
+   
+   private Stack<BSTreeNode<E>> stack;
+   
+   
+   /**
+    * @param BSTreeNode<E> root
+    */
+   public BSTIteratorInOrder(BSTreeNode<E> root) {
+       // Stack for the recursion simulation
+        this.stack = new Stack<BSTreeNode<E>>();
+        
+        // with the root node as the input
+        this.leftMostNode(root);
+   }
 
-	}
-	public E inOrder(BSTreeNode<E> root) {
-        if(root != null) {
-            inOrder(root.getLeft());
-            E returnData = root.getData();
-            inOrder(root.getRight());
-            return returnData;
+   private void leftMostNode(BSTreeNode<E> root) {
+        //add all the elements from left subtree for a given branch.
+        while (root != null) {
+            this.stack.push(root);
+            root = root.getLeft();
         }
-        return null;
+      
+   }
+   
+     /**
+    * @return the top most node
+     */
+    public BSTreeNode next() {
+        
+       BSTreeNode<E> topmostNode = this.stack.pop();  //top of the stack will be the current min
+        
+        if (topmostNode.getRight() != null) {     //Check if current min has right subtree.
+            this.leftMostNode(topmostNode.getRight());
+        }
+        
+        return topmostNode;    
     }
 
 
-	/**
-	 * Returns true if the iteration has more elements. (In other
-	 * words, returns true if next() would return an
-	 * element rather than throwing an exception.)
-	 * 
-	 * @return true if the iterator has more elements.
-	 */
-	@Override
-	public boolean hasNext() {
-		return !stack.isEmpty();
-		
-	}
-
-	/**
-	 * Returns the next element in the iteration.
-	 * 
-	 * @return The next element in the iteration.
-	 * @throws NoSuchElementException If the iteration has no more elements.
-	 */
-	@Override
-	public E next() throws NoSuchElementException {
-		if (! hasNext()) {
-		    throw new NoSuchElementException("No more elements.");
-		}
-		
-		BSTreeNode<E> node = stack.pop();
-			
-			while (node.getRight() != null) {
-				
-				stack.push(node);
-				
-				node = node.getLeft();
-			}
-			
-			System.out.println("pls");
-		
-		
-			return node.getData();
-//		return inOrder(node);
-//		
-	}
-		
+    /**
+     * @return whether we have a next node
+     */
+    public boolean hasNext() {
+        return this.stack.size() > 0;
+    }
+      
 }

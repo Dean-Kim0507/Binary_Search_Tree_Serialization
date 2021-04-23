@@ -6,7 +6,7 @@ import java.util.Stack;
 import utilities.Iterator;
 
 /**
- * BSTIteratorPostOrder.java - This iterator makes a copy of 
+ * BSTIteratorPreOrder.java - This iterator makes a copy of 
  * the collection of elements and performs a complete walk 
  * through the data structure, in pre-order  trasversal.
  * 
@@ -51,7 +51,7 @@ public class BSTIteratorPreOrder<E> implements Iterator<E> {
 	 * @throws NoSuchElementException If the iteration has no more elements.
 	 */
 	@Override
-	public E next() throws NoSuchElementException {
+	public BSTreeNode next() throws NoSuchElementException {
 		if (! hasNext()) {
 		    throw new NoSuchElementException("No more elements.");
 		}
@@ -63,7 +63,7 @@ public class BSTIteratorPreOrder<E> implements Iterator<E> {
 		
 		if (!node.getLeft().equals(null)) stack.push(node.getLeft());
 			
-		return node.getData();
+		return node;
 	}
 
 }

@@ -2,6 +2,8 @@ package utilities;
 
 import java.util.NoSuchElementException;
 
+import implementation.BSTreeNode;
+
 /**
  * This interface will provide an mono-directional iterator for any of the data
  * structures that are specified in this package. The implementor is only
@@ -30,5 +32,7 @@ public interface Iterator<E> {
 	 * @return The next element in the iteration.
 	 * @throws NoSuchElementException If the iteration has no more elements.
 	 */
-	public E next() throws NoSuchElementException;
+	public BSTreeNode next() throws NoSuchElementException;
+	
 }
+

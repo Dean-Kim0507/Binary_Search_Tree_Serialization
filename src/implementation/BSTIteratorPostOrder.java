@@ -57,7 +57,7 @@ public class BSTIteratorPostOrder<E> implements Iterator<E> {
 	 * @throws NoSuchElementException If the iteration has no more elements.
 	 */
 	@Override
-	public E next() throws NoSuchElementException {
+	public BSTreeNode next() throws NoSuchElementException {
 		if (! hasNext()) {
 		    throw new NoSuchElementException("No more elements.");
 		}

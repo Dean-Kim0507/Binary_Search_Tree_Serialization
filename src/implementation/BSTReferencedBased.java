@@ -49,6 +49,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 		return height(root);
 	}
 	
+	
 	/**
 	 * Determines the row height of the tree and returns that value as an
 	 * integer value.
@@ -203,22 +204,33 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	 * @param newEntry - element beimg added.
 	 * @return the noded added to the BST.
 	 */
+	private int count=0;
 	public BSTreeNode<E> addRec(BSTreeNode<E> root, E newEntry) {
 		
 		if (root == null) {
 			root = new BSTreeNode<E>(newEntry);
+			root.setHeight(count);
+			count = 0;
 			return root;
 		}
 		
 		if (newEntry.compareTo(root.getData()) < 0) {
-			
+			count++;
 			root.setLeft(addRec(root.getLeft(), newEntry));
 			
-		} else if (newEntry.compareTo(root.getData()) > 0) {
 			
+		} else if (newEntry.compareTo(root.getData()) > 0) {
+			count++;
 			root.setRight(addRec(root.getRight(), newEntry));
 			
-		}
+			
+		} else if (newEntry.compareTo(root.getData()) == 0) {
+			
+			root.setFrequency();
+			count=0;
+//			root.setRight(addRec(root.getRight(), newEntry));
+			
+		} 
 		
 		return root;
 		

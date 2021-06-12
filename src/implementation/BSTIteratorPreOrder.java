@@ -22,7 +22,7 @@ public class BSTIteratorPreOrder<E> implements Iterator<E> {
 	
 	/**
 	 * User defined constructor
-	 * @param root 
+	 * @param root - the object of BSTreeNode that has all of subtrees
 	 */
 	public BSTIteratorPreOrder (BSTreeNode<E> root) {
 		stack = new Stack<BSTreeNode<E>>();

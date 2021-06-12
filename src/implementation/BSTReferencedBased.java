@@ -11,7 +11,7 @@ import utilities.Iterator;
  * 
  * @author Jaehan Kim, Donghyun Kim, Maria Laura Diaz Pena
  * @version April 15, 2021
- * @param <E>
+ * @param <E> - Generic Object
  */
 public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
@@ -31,6 +31,12 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 	
 	/**
+	 * the count number, it will be the number of the lines of node
+	 */
+	
+	private int count=0;
+	
+	/**
 	 * The node at the root of the Binary Search Tree will be returned.
 	 * @return node stored at the root of tree is returned
 	 * @throws TreeException if the root is empty.
@@ -41,8 +47,8 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	/**
-	 * This method mainly calls the height(BSTreeNode<E> node) method
-	 * @return the height of the tree.
+	 * This method mainly calls the height(root) method
+	 * @return height - the height of the tree.
 	 */
 	@Override
 	public int getHeight() {
@@ -53,6 +59,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	/**
 	 * Determines the row height of the tree and returns that value as an
 	 * integer value.
+	 * @param node - the node of BST
 	 * @return the height of the tree.
 	 */
 	public int height(BSTreeNode<E> node) {
@@ -70,7 +77,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	/**
-	 * This method mainly calls the size(BSTreeNode<E> node) method.
+	 * This method mainly calls the size(root) method.
 	 * @return number of elements currently stored in tree.
 	 */
 	@Override
@@ -81,6 +88,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	/**
 	 * The number of elements currently stored in the tree is counted and
 	 * the value is returned.
+	 * @param node - the node of tree
 	 * @return number of elements currently stored in tree.
 	 */
 	public int size(BSTreeNode<E> node) {
@@ -142,9 +150,10 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	/**
-	 * This method mainly calls the searchRec(BSTreeNode<E> root, E entry)
+	 * This method mainly calls the searchRec(BSTreeNode root, E entry)
 	 * method.
 	 * @return the node with the element located in tree, null if not found
+	 * @param entry - Generic Object
 	 * @throws TreeException if the tree is empty
 	 */
 	@Override
@@ -156,6 +165,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	/**
 	 * Retrieves a node from the tree given the object to search for.
 	 * @param entry element object being searched
+	 * @param root -Generic Objet
 	 * @return the node with the element located in tree, null if not found
 	 * @throws TreeException if the tree is empty
 	 */
@@ -173,7 +183,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	/**
-	 * This method mainly calls the addRec(BSTreeNode<E> root, E newEntry)
+	 * This method mainly calls the addRec(BSTreeNode root, E newEntry)
 	 * method. 
 	 * @param newEntry the element being added to the tree
 	 * @return a boolean true if the element is added successfully else false
@@ -200,11 +210,10 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	 * Adds a new element to the tree according to the natural ordering
 	 * established by the Comparable implementation.
 	 * 
-	 * @param root - root node of BST
+	 * @param root - root node of BST.
 	 * @param newEntry - element beimg added.
-	 * @return the noded added to the BST.
+	 * @return the node added to the BST.
 	 */
-	private int count=0;
 	public BSTreeNode<E> addRec(BSTreeNode<E> root, E newEntry) {
 		
 		if (root == null) {
@@ -218,22 +227,16 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 			count++;
 			root.setLeft(addRec(root.getLeft(), newEntry));
 			
-			
 		} else if (newEntry.compareTo(root.getData()) > 0) {
 			count++;
 			root.setRight(addRec(root.getRight(), newEntry));
-			
 			
 		} else if (newEntry.compareTo(root.getData()) == 0) {
 			
 			root.setFrequency();
 			count=0;
-//			root.setRight(addRec(root.getRight(), newEntry));
-			
 		} 
-		
-		return root;
-		
+		return root;	
 	}
 
 	/**

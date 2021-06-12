@@ -19,5 +19,8 @@ Donghyun Kim, Jaehan Kim, Maria Laura Diaz Pena
 2) Change directory which includes the Tracker.jar file.
 3) Typle in the command lines with arguments like the example below.
 4) Command examples
-java -jar Tracker.jar -fres/textfile.txt
+java -jar Tracker.jar -f ./res/textfile.txt
+java -jar Tracker.jar -pf
+java -jar Tracker.jar -pl
+java -jar Tracker.jar -po
 

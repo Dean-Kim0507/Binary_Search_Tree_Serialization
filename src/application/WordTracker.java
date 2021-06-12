@@ -15,13 +15,20 @@ import java.util.Scanner;
 import utilities.BSTreeADT;
 import utilities.Iterator;
 import implementation.*;
-
+/**
+ * WordTracker.java - This word tracker tracks the all of the words in the text file and then store
+ * to the binary tree. It will print all of the words in the binary tree with the line of node or the frequency
+ * it depends on what user give a option.
+ * 
+ * @author Jaehan Kim, Donghyun Kim, Maria Laura Diaz Pena
+ * @version April 23, 2021
+ */
 public class WordTracker {
 
 	public static void main(String[] args) throws IOException {
 		//Attributes
 		BSTreeADT<String> tree = new BSTReferencedBased<String>();
-
+		
 		String filename = null;
 		String outputFile = null;
 		String option;
@@ -34,7 +41,8 @@ public class WordTracker {
 		FileInputStream fis;
 		BufferedInputStream bis;
 		ObjectInputStream in;
-
+		
+		// Get the binary tree from the repository.ser
 		try {
 			file = new File("./res/repository.ser");
 			//Check if the binay file exists or not
@@ -47,6 +55,7 @@ public class WordTracker {
 				tree = (BSTreeADT<String>) in.readObject();
 				in.close();
 			}
+			// If the binary file doesn't exist, output the new binary file by reading the words in the text file. 
 			else {
 				try {
 					filename = args[1];
@@ -64,7 +73,7 @@ public class WordTracker {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				// store the binary file
 				FileOutputStream fos = new FileOutputStream("res/repository.ser");
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -75,9 +84,10 @@ public class WordTracker {
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
-			
 		}
 
+		//Print part
+		// Print all of the words in binary tree alphabetically
 		if (option.equals("-pf")) {
 			Iterator<String> treeIterator = tree.inorderIterator();
 			while (treeIterator.hasNext()) {
@@ -87,6 +97,7 @@ public class WordTracker {
 				}
 				System.out.print("\n");
 			}
+			// Print all of the words in binary tree alphabetically with the line of the each word
 		} else if (option.equals("-pl")) {
 			Iterator<String> treeIterator = tree.inorderIterator();
 			while (treeIterator.hasNext()) {
@@ -94,6 +105,7 @@ public class WordTracker {
 				System.out.println(inorderIterator.getData());
 				System.out.println("Height: " + inorderIterator.getHeight());
 			}
+			// Print all of the words in binary tree alphabetically with the frequency of the each word
 		} else if (option.equals("-po")) {
 			Iterator<String> treeIterator = tree.inorderIterator();
 			while (treeIterator.hasNext()) {
@@ -101,8 +113,8 @@ public class WordTracker {
 				System.out.println(inorderIterator.getData());
 				System.out.println("Frequency: " + inorderIterator.getFrequency());
 			}
+			//Redirect the report in the previous step to a file 
 		} else if (option.equals("-f")) {
-
 			try {
 				filename = args[1];
 				file = new File(filename);
@@ -128,6 +140,7 @@ public class WordTracker {
 
 			System.out.print("Serialization complete");
 		}
+		//If option is invalid, it will print
 		else System.out.println("Invalid option Key");
 	}
 }

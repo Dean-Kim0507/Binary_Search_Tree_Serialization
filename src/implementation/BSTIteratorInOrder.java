@@ -20,7 +20,7 @@ public class BSTIteratorInOrder<E> implements Iterator<E> {
    
    
    /**
-    * @param BSTreeNode<E> root
+    * @param root - the root object that has all the sub trees
     */
    public BSTIteratorInOrder(BSTreeNode<E> root) {
        // Stack for the recursion simulation

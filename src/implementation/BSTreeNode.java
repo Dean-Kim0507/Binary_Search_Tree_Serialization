@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 
  * @author Jaehan Kim, Donghyun Kim, Maria Laura Diaz Pena
  * @version April 15, 2021
- * @param <E>
+ * @param <E> - Generic Object
  */
 public class BSTreeNode<E> implements Serializable {
 
@@ -91,7 +91,7 @@ public class BSTreeNode<E> implements Serializable {
 	
 	/**
 	 * Set the number of Height
-	 * 
+	 * @param height - height in the binary tree
 	 */
 	public void setHeight(int height) {
 		this.height = height;
